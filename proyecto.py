@@ -53,3 +53,17 @@ class Agenda:
                     return True
             else:
                 print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
+
+    def eliminar_contacto(self):
+        self.mostrar_contactos()
+        nombre = input("Ingrese el nombre del contacto que desea buscar: ")
+        encontrado = False
+        for contacto in self.contactos:
+            if contacto.nombre.lower() == nombre.lower():
+                encontrado = True
+                self.contactos.remove(contacto)
+                print(f"El contacto {nombre} ha sido eliminado.")
+                self.eliminar_contacto_db(nombre)
+                break
+        if not encontrado:
+            print("Contacto no encontrado.")
