@@ -53,3 +53,12 @@ class Agenda:
                     return True
             else:
                 print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
+    def mostrar_contactos(self):
+        if self.contactos:
+            for contacto in self.contactos:
+                if contacto.favorito:
+                    print(f"{contacto} (Favorito)")
+                else:
+                    print(contacto)
+        else:
+            print("No hay contactos en la agenda.")
