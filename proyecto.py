@@ -67,3 +67,14 @@ class Agenda:
                 break
         if not encontrado:
             print("Contacto no encontrado.")
+
+
+    def guardar_agenda(self):
+        contactos_guardados = set()
+        with open("agenda.txt", "w") as file:
+            for contacto in self.contactos:
+                if contacto.nombre not in contactos_guardados:
+                    file.write(f"{contacto.nombre},{contacto.telefono},{contacto.email}\n")
+                    contactos_guardados.add(contacto.nombre)
+                else:
+                    print(f"El contacto {contacto.nombre} ya existe en la agenda y no se ha guardado nuevamente.")
