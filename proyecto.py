@@ -78,3 +78,37 @@ class Agenda:
                     contactos_guardados.add(contacto.nombre)
                 else:
                     print(f"El contacto {contacto.nombre} ya existe en la agenda y no se ha guardado nuevamente.")
+
+
+def menu():
+    print("\n1. Agregar contacto")
+    print("2. Mostrar contactos")
+    print("3. Buscar contacto")
+    print("4. Eliminar contacto")
+    print("5. Editar contacto")
+    print("6. Salir")
+
+def main():
+    agenda = Agenda()
+    agenda.cargar_agenda()
+
+    while True:
+        menu()
+        opcion = input("Ingrese el número de la opción que desea realizar: ")
+
+        if opcion == '1':
+            agenda.agregar_contacto()
+        elif opcion == '2':
+            agenda.mostrar_contactos()
+        elif opcion == '3':
+            agenda.buscar_contacto()
+        elif opcion == '4':
+            agenda.eliminar_contacto()
+        elif opcion == '5':
+            agenda.editar_contacto()
+        elif opcion == '6':
+            print("Saliendo del programa...")
+            break
+
+if __name__ == "__main__":
+    main()
