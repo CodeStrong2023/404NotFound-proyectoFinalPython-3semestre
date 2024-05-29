@@ -53,6 +53,7 @@ class Agenda:
                     return True
             else:
                 print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
+<<<<<<< HEAD
     def mostrar_contactos(self):
         if self.contactos:
             for contacto in self.contactos:
@@ -62,3 +63,64 @@ class Agenda:
                     print(contacto)
         else:
             print("No hay contactos en la agenda.")
+=======
+
+    def eliminar_contacto(self):
+        self.mostrar_contactos()
+        nombre = input("Ingrese el nombre del contacto que desea buscar: ")
+        encontrado = False
+        for contacto in self.contactos:
+            if contacto.nombre.lower() == nombre.lower():
+                encontrado = True
+                self.contactos.remove(contacto)
+                print(f"El contacto {nombre} ha sido eliminado.")
+                self.eliminar_contacto_db(nombre)
+                break
+        if not encontrado:
+            print("Contacto no encontrado.")
+
+
+    def guardar_agenda(self):
+        contactos_guardados = set()
+        with open("agenda.txt", "w") as file:
+            for contacto in self.contactos:
+                if contacto.nombre not in contactos_guardados:
+                    file.write(f"{contacto.nombre},{contacto.telefono},{contacto.email}\n")
+                    contactos_guardados.add(contacto.nombre)
+                else:
+                    print(f"El contacto {contacto.nombre} ya existe en la agenda y no se ha guardado nuevamente.")
+
+
+def menu():
+    print("\n1. Agregar contacto")
+    print("2. Mostrar contactos")
+    print("3. Buscar contacto")
+    print("4. Eliminar contacto")
+    print("5. Editar contacto")
+    print("6. Salir")
+
+def main():
+    agenda = Agenda()
+    agenda.cargar_agenda()
+
+    while True:
+        menu()
+        opcion = input("Ingrese el número de la opción que desea realizar: ")
+
+        if opcion == '1':
+            agenda.agregar_contacto()
+        elif opcion == '2':
+            agenda.mostrar_contactos()
+        elif opcion == '3':
+            agenda.buscar_contacto()
+        elif opcion == '4':
+            agenda.eliminar_contacto()
+        elif opcion == '5':
+            agenda.editar_contacto()
+        elif opcion == '6':
+            print("Saliendo del programa...")
+            break
+
+if __name__ == "__main__":
+    main()
+>>>>>>> ramaDev
