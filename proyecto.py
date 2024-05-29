@@ -53,7 +53,6 @@ class Agenda:
                     return True
             else:
                 print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
-<<<<<<< HEAD
     def mostrar_contactos(self):
         if self.contactos:
             for contacto in self.contactos:
@@ -64,7 +63,7 @@ class Agenda:
         else:
             print("No hay contactos en la agenda.")
             
-        def buscar_contacto(self):
+    def buscar_contacto(self):
         self.mostrar_contactos()
         nombre = input("Ingrese el nombre del contacto que desea buscar: ")
         encontrado = False
@@ -77,7 +76,6 @@ class Agenda:
                     print(contacto)
         if not encontrado:
             print("Contacto no encontrado.")
-=======
 
     def eliminar_contacto(self):
         self.mostrar_contactos()
@@ -137,4 +135,3 @@ def main():
 
 if __name__ == "__main__":
     main()
->>>>>>> ramaDev
