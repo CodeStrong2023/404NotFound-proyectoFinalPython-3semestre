@@ -6,4 +6,4 @@ CREATE TABLE contactos (
     telefono VARCHAR(20),
     email VARCHAR(255) NOT NULL,
     favorito BOOLEAN
-)
+);
