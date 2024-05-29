@@ -63,6 +63,20 @@ class Agenda:
                     print(contacto)
         else:
             print("No hay contactos en la agenda.")
+            
+        def buscar_contacto(self):
+        self.mostrar_contactos()
+        nombre = input("Ingrese el nombre del contacto que desea buscar: ")
+        encontrado = False
+        for contacto in self.contactos:
+            if contacto.nombre.lower() == nombre.lower():
+                encontrado = True
+                if contacto.favorito:
+                    print(f"{contacto} (Favorito)")
+                else:
+                    print(contacto)
+        if not encontrado:
+            print("Contacto no encontrado.")
 =======
 
     def eliminar_contacto(self):
