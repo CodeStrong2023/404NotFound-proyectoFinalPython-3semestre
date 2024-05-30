@@ -92,15 +92,17 @@ class Agenda:
             print("Contacto no encontrado.")
 
 
-    def guardar_agenda(self):
-        contactos_guardados = set()
-        with open("agenda.txt", "w") as file:
-            for contacto in self.contactos:
-                if contacto.nombre not in contactos_guardados:
-                    file.write(f"{contacto.nombre},{contacto.telefono},{contacto.email}\n")
-                    contactos_guardados.add(contacto.nombre)
-                else:
-                    print(f"El contacto {contacto.nombre} ya existe en la agenda y no se ha guardado nuevamente.")
+    def guardar_agenda_db(self, contacto):
+        query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"
+        values = (contacto.nombre, contacto.telefono, contacto.email, contacto.favorito)
+        self.cursor.execute(query, values)
+        self.db_connection.commit()
+
+    def eliminar_contacto_db(self, nombre):
+        query = "DELETE FROM contactos WHERE nombre = %s"
+        values = (nombre,)
+        self.cursor.execute(query, values)
+        self.db_connection.commit()
 
 
 def menu():
