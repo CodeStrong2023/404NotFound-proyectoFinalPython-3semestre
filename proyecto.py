@@ -105,6 +105,19 @@ class Agenda:
         self.cursor.execute(query, values)
         self.db_connection.commit()
 
+    def editar_contacto_db(self, contacto):
+        query = "UPDATE contactos SET telefono = %s, email = %s, favorito = %s WHERE nombre = %s"
+        values = (contacto.telefono, contacto.email, contacto.favorito, contacto.nombre)
+        self.cursor.execute(query, values)
+        self.db_connection.commit()
+
+    def cargar_agenda(self):
+        query = "SELECT nombre, telefono, email, favorito FROM contactos"
+        self.cursor.execute(query)
+        for nombre, telefono, email, favorito in self.cursor.fetchall():
+            contacto = Contacto(nombre, telefono, email)
+            contacto.favorito = favorito
+            self.contactos.append(contacto)
 
 def menu():
     print("\n1. Agregar contacto")
