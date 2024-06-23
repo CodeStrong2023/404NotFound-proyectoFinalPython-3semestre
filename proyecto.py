@@ -2,12 +2,15 @@ import mysql.connector
 import re
 
 
-class Contacto:
+class Contacto:  # Esta clase representa un contacto en la agenda.
     def __init__(self, nombre, telefono, email):
         self.nombre = nombre
         self.telefono = telefono
         self.email = email
         self.favorito = False
+
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Teléfono: {self.telefono}, Email: {self.email}"
 
 
 class Agenda:
@@ -16,10 +19,10 @@ class Agenda:
         self.db_connection = mysql.connector.connect(
             host="127.0.0.1",
             user="root",
-            password="ignacio",
+            password="carinab71",
             database="agenda_contactos"
         )
-        self.cursor = self.db_connection.cursor()
+        self.cursor = self.db_connection.cursor()  # El cursor se utiliza para ejecutar instrucciones SQL y recuperar datos.
 
     def validarNumero(self, telefono):
         while not telefono.isdigit():
@@ -62,13 +65,14 @@ class Agenda:
                     print(contacto)
         else:
             print("No hay contactos en la agenda.")
+
             
     def buscar_contacto(self):
         self.mostrar_contactos()
         nombre = input("Ingrese el nombre del contacto que desea buscar: ")
         encontrado = False
         for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():
+            if contacto.nombre.lower() == nombre.lower():  # Comparamos nombres en minúsculas
                 encontrado = True
                 if contacto.favorito:
                     print(f"{contacto} (Favorito)")
