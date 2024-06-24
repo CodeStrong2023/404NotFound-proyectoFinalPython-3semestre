@@ -12,6 +12,7 @@ class Contacto:  # Esta clase representa un contacto en la agenda.
     def __str__(self):
         return f"Nombre: {self.nombre}, Teléfono: {self.telefono}, Email: {self.email}"
 
+
 class Agenda:
     def __init__(self):
         self.contactos = []
@@ -28,18 +29,20 @@ class Agenda:
             print("El número de teléfono debe contener números")
             telefono = input("Ingrese el número de teléfono del contacto: ")
         return telefono
-        
+
     def agregar_contacto(self):
         while True:
             nombre = input("Ingrese el nombre del contacto: ")
             telefono = input("Ingrese el número de teléfono del contacto: ")
             telefono = self.validarNumero(telefono)
             email = input("Ingrese el email del contacto: ")
-            
+
             if re.match(r"[^@]+@[^@]+\.[^@]+", email):
                 nuevo_contacto = Contacto(nombre, telefono, email)
-                
-                exists = any(contacto.nombre == nombre or contacto.email == email or contacto.telefono == telefono for contacto in self.contactos)
+
+                exists = any(
+                    contacto.nombre == nombre or contacto.email == email or contacto.telefono == telefono for contacto
+                    in self.contactos)
                 if exists:
                     print("El contacto ya existe.")
                     return False
@@ -55,6 +58,7 @@ class Agenda:
                     return True
             else:
                 print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
+
     def mostrar_contactos(self):
         if self.contactos:
             for contacto in self.contactos:
@@ -120,7 +124,7 @@ class Agenda:
             print("Contacto no encontrado.")
 
     def guardar_agenda_db(self, contacto):
-        query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)" # Insertamos un nuevo registro
+        query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"  # Insertamos un nuevo registro
         values = (contacto.nombre, contacto.telefono, contacto.email, contacto.favorito)
         self.cursor.execute(query, values)
         self.db_connection.commit()
@@ -145,6 +149,7 @@ class Agenda:
             contacto.favorito = favorito
             self.contactos.append(contacto)  # Con append se agrega el objeto Contacto creado a la lista
 
+
 def menu():
     print("\n1. Agregar contacto")
     print("2. Mostrar contactos")
@@ -152,6 +157,7 @@ def menu():
     print("4. Eliminar contacto")
     print("5. Editar contacto")
     print("6. Salir")
+
 
 def main():
     agenda = Agenda()
@@ -175,6 +181,6 @@ def main():
             print("Saliendo del programa...")
             break  # Rompe el bucle
 
+
 if __name__ == "__main__":  # Llama a la función main() cuando el script se ejecuta directamente desde la línea de comandos
     main()
-
