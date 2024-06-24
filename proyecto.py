@@ -121,7 +121,7 @@ class Agenda:
                 self.editar_contacto_db(contacto)
                 break
         if not encontrado:
-            print("Contacto no encontrado.")
+            print("Contacto no encontrado.") 
 
     def guardar_agenda_db(self, contacto):
         query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"  # Insertamos un nuevo registro
