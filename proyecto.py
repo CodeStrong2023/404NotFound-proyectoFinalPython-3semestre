@@ -1,5 +1,5 @@
-import mysql.connector
-import re
+import mysql.connector  # Importa el módulo mysql.connector para interactuar con MySQL desde Python
+import re  # Importa el módulo re para utilizar expresiones regulares en el manejo de cadenas
 
 
 class Contacto:  # Esta clase representa un contacto en la agenda.
@@ -11,7 +11,6 @@ class Contacto:  # Esta clase representa un contacto en la agenda.
 
     def __str__(self):
         return f"Nombre: {self.nombre}, Teléfono: {self.telefono}, Email: {self.email}"
-
 
 class Agenda:
     def __init__(self):
@@ -66,7 +65,6 @@ class Agenda:
         else:
             print("No hay contactos en la agenda.")
 
-            
     def buscar_contacto(self):
         self.mostrar_contactos()
         nombre = input("Ingrese el nombre del contacto que desea buscar: ")
@@ -121,9 +119,8 @@ class Agenda:
         if not encontrado:
             print("Contacto no encontrado.")
 
-
     def guardar_agenda_db(self, contacto):
-        query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"
+        query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)" # Insertamos un nuevo registro
         values = (contacto.nombre, contacto.telefono, contacto.email, contacto.favorito)
         self.cursor.execute(query, values)
         self.db_connection.commit()
@@ -137,16 +134,16 @@ class Agenda:
     def editar_contacto_db(self, contacto):
         query = "UPDATE contactos SET telefono = %s, email = %s, favorito = %s WHERE nombre = %s"
         values = (contacto.telefono, contacto.email, contacto.favorito, contacto.nombre)
-        self.cursor.execute(query, values)
-        self.db_connection.commit()
+        self.cursor.execute(query, values)  # Ejecutamos la consulta SQL
+        self.db_connection.commit()  # Aplicamos los cambios en la base de datos
 
     def cargar_agenda(self):
         query = "SELECT nombre, telefono, email, favorito FROM contactos"
         self.cursor.execute(query)
-        for nombre, telefono, email, favorito in self.cursor.fetchall():
+        for nombre, telefono, email, favorito in self.cursor.fetchall():  # Obtiene todas las filas resultantes de la consulta
             contacto = Contacto(nombre, telefono, email)
             contacto.favorito = favorito
-            self.contactos.append(contacto)
+            self.contactos.append(contacto)  # Con append se agrega el objeto Contacto creado a la lista
 
 def menu():
     print("\n1. Agregar contacto")
@@ -176,8 +173,8 @@ def main():
             agenda.editar_contacto()
         elif opcion == '6':
             print("Saliendo del programa...")
-            break
+            break  # Rompe el bucle
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # Llama a la función main() cuando el script se ejecuta directamente desde la línea de comandos
     main()
 
