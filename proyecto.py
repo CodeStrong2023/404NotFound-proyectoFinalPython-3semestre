@@ -99,17 +99,17 @@ class Agenda:
 
     def editar_contacto(self):
         self.mostrar_contactos()
-        nombre = input("Ingrese el nombre del contacto que desea editar: ")
+        nombre = input("Digite el nombre del contacto que desea editar: ")
         encontrado = False
         for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():
+            if contacto.nombre.lower() == nombre.lower():  # Comparamos minusculas
                 encontrado = True
                 print("Editar contacto: ")
                 nuevo_nombre = input(f"Nuevo nombre ({contacto.nombre}): ") or contacto.nombre
                 nuevo_telefono = input(f"Nuevo teléfono ({contacto.telefono}): ") or contacto.telefono
                 nuevo_email = input(f"Nuevo email ({contacto.email}): ") or contacto.email
-                favorito = input("¿Desea marcar el contacto como favorito? (s/n): ").lower()
-
+                favorito = input("¿Desea marcar el contacto como favorito?(s/n): ").lower()
+                # Se actualizan los atributos del contacto con los nuevos valores
                 contacto.nombre = nuevo_nombre
                 contacto.telefono = nuevo_telefono
                 contacto.email = nuevo_email
@@ -117,11 +117,11 @@ class Agenda:
                     contacto.favorito = True
                 elif favorito == "n":
                     contacto.favorito = False
-                print("Contacto actualizado correctamente.")
+                print("¡Contacto actualizado correctamente! ")
                 self.editar_contacto_db(contacto)
                 break
         if not encontrado:
-            print("Contacto no encontrado.")
+            print("¡Contacto no encontrado!")
 
     def guardar_agenda_db(self, contacto):
         query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"  # Insertamos un nuevo registro
