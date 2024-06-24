@@ -104,7 +104,7 @@ class Agenda:
         for contacto in self.contactos:
             if contacto.nombre.lower() == nombre.lower():
                 encontrado = True
-                print("Editar contacto:")
+                print("Editar contacto: ")
                 nuevo_nombre = input(f"Nuevo nombre ({contacto.nombre}): ") or contacto.nombre
                 nuevo_telefono = input(f"Nuevo teléfono ({contacto.telefono}): ") or contacto.telefono
                 nuevo_email = input(f"Nuevo email ({contacto.email}): ") or contacto.email
