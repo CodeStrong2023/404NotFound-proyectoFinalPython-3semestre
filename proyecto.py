@@ -85,7 +85,7 @@ class Agenda:
 
     def eliminar_contacto(self):
         self.mostrar_contactos()
-        nombre = input("Ingrese el nombre del contacto que desea buscar: ")
+        nombre = input("Ingrese el nombre del contacto que desea eliminar: ")
         encontrado = False
         for contacto in self.contactos:
             if contacto.nombre.lower() == nombre.lower():
