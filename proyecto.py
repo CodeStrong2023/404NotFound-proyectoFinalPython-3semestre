@@ -27,13 +27,13 @@ class Agenda:
 
     def validarNumero(self, telefono):
         while not telefono.isdigit():
-            print("El número de teléfono debe contener números")
+            print("El número de teléfono debe contener números.")
             telefono = input("Ingrese el número de teléfono del contacto: ")
         return telefono
 
     def agregar_contacto(self):
         while True:
-            nombre = input("Ingrese el nombre del contacto: ")
+            nombre = input("\nIngrese el nombre del contacto: ")
             telefono = input("Ingrese el número de teléfono del contacto: ")
             telefono = self.validarNumero(telefono)
             email = input("Ingrese el email del contacto: ")
@@ -57,10 +57,10 @@ class Agenda:
                         nuevo_contacto.favorito = False
                     self.contactos.append(nuevo_contacto)
                     self.guardar_agenda_db(nuevo_contacto)
-                    print("Contacto agregado correctamente.")
+                    print("\nContacto agregado correctamente!")
                     return True
             else:
-                print("El formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
+                print("\nEl formato del correo electrónico no es válido. Por favor, inténtelo nuevamente.")
 
     def mostrar_contactos(self):
         if self.contactos:
@@ -70,39 +70,39 @@ class Agenda:
                 else:
                     print(contacto)
         else:
-            print("No hay contactos en la agenda.")
+            print("\nNo hay contactos en la agenda.")
 
     def buscar_contacto(self):
         self.mostrar_contactos()
-        nombre = input("Ingrese el nombre del contacto que desea buscar: ")
+        nombre = input("\nIngrese el nombre del contacto que desea buscar: ")
         encontrado = False
         for contacto in self.contactos:
             if contacto.nombre.lower() == nombre.lower():  # Comparamos nombres en minúsculas
                 encontrado = True
                 if contacto.favorito:
-                    print(f"{contacto} (Favorito)")
+                    print(f"\n{contacto} (Favorito)")
                 else:
                     print(contacto)
         if not encontrado:
-            print("Contacto no encontrado.")
+            print("\n***Contacto no encontrado***")
 
     def eliminar_contacto(self):
         self.mostrar_contactos()
-        nombre = input("Ingrese el nombre del contacto que desea eliminar: ")
+        nombre = input("\nIngrese el nombre del contacto que desea eliminar: ")
         encontrado = False
         for contacto in self.contactos:
             if contacto.nombre.lower() == nombre.lower():
                 encontrado = True
                 self.contactos.remove(contacto)
-                print(f"El contacto {nombre} ha sido eliminado.")
+                print(f"\nEl contacto {nombre} ha sido eliminado.")
                 self.eliminar_contacto_db(nombre)  # Se elimina el contacto de la base de datos
                 break
         if not encontrado:
-            print("Contacto no encontrado.")
+            print("\n***Contacto no encontrado***")
 
     def editar_contacto(self):
         self.mostrar_contactos()
-        id = input("Ingrese el ID del contacto que desea editar: ")
+        id = input("\nIngrese el ID del contacto que desea editar: ")
         encontrado = False
         for contacto in self.contactos:
             if str(contacto.id) == id:
@@ -124,7 +124,7 @@ class Agenda:
                 self.editar_contacto_db(contacto)
                 break
         if not encontrado:
-            print("¡Contacto no encontrado!")
+            print("\n¡Contacto no encontrado!")
 
     def guardar_agenda_db(self, contacto):
         query = "INSERT INTO contactos (nombre, telefono, email, favorito) VALUES (%s, %s, %s, %s)"  # Insertamos un nuevo registro
