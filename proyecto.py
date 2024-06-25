@@ -3,14 +3,15 @@ import re  # Importa el módulo re para utilizar expresiones regulares en el man
 
 
 class Contacto:  # Esta clase representa un contacto en la agenda.
-    def __init__(self, nombre, telefono, email):
+    def __init__(self, id, nombre, telefono, email):
+        self.id = id
         self.nombre = nombre
         self.telefono = telefono
         self.email = email
         self.favorito = False
 
     def __str__(self):
-        return f"Nombre: {self.nombre}, Teléfono: {self.telefono}, Email: {self.email}"
+        return f"ID: {self.id}, Nombre: {self.nombre}, Teléfono: {self.telefono}, Email: {self.email}"
 
 
 class Agenda:
@@ -38,7 +39,9 @@ class Agenda:
             email = input("Ingrese el email del contacto: ")
 
             if re.match(r"[^@]+@[^@]+\.[^@]+", email):
-                nuevo_contacto = Contacto(nombre, telefono, email)
+                # Genera un ID incremental basado en la cantidad de contactos existentes
+                id_contacto = len(self.contactos) + 1
+                nuevo_contacto = Contacto(id_contacto, nombre, telefono, email)
 
                 exists = any(
                     contacto.nombre == nombre or contacto.email == email or contacto.telefono == telefono for contacto
@@ -99,16 +102,16 @@ class Agenda:
 
     def editar_contacto(self):
         self.mostrar_contactos()
-        nombre = input("Digite el nombre del contacto que desea editar: ")
+        id = input("Ingrese el ID del contacto que desea editar: ")
         encontrado = False
         for contacto in self.contactos:
-            if contacto.nombre.lower() == nombre.lower():  # Comparamos minusculas
+            if str(contacto.id) == id:
                 encontrado = True
-                print("Editar contacto: ")
+                print("Editar contacto:")
                 nuevo_nombre = input(f"Nuevo nombre ({contacto.nombre}): ") or contacto.nombre
                 nuevo_telefono = input(f"Nuevo teléfono ({contacto.telefono}): ") or contacto.telefono
                 nuevo_email = input(f"Nuevo email ({contacto.email}): ") or contacto.email
-                favorito = input("¿Desea marcar el contacto como favorito?(s/n): ").lower()
+                favorito = input("¿Desea marcar el contacto como favorito? (s/n): ").lower()
                 # Se actualizan los atributos del contacto con los nuevos valores
                 contacto.nombre = nuevo_nombre
                 contacto.telefono = nuevo_telefono
@@ -136,16 +139,16 @@ class Agenda:
         self.db_connection.commit()
 
     def editar_contacto_db(self, contacto):
-        query = "UPDATE contactos SET telefono = %s, email = %s, favorito = %s WHERE nombre = %s"
-        values = (contacto.telefono, contacto.email, contacto.favorito, contacto.nombre)
+        query = "UPDATE contactos SET nombre = %s, telefono = %s, email = %s, favorito = %s WHERE id = %s"
+        values = (contacto.nombre, contacto.telefono, contacto.email, contacto.favorito, contacto.id)
         self.cursor.execute(query, values)  # Ejecutamos la consulta SQL
         self.db_connection.commit()  # Aplicamos los cambios en la base de datos
 
     def cargar_agenda(self):
-        query = "SELECT nombre, telefono, email, favorito FROM contactos"
+        query = "SELECT id, nombre, telefono, email, favorito FROM contactos"
         self.cursor.execute(query)
-        for nombre, telefono, email, favorito in self.cursor.fetchall():  # Obtiene todas las filas resultantes de la consulta
-            contacto = Contacto(nombre, telefono, email)
+        for id, nombre, telefono, email, favorito in self.cursor.fetchall():  # Obtiene todas las filas resultantes de la consulta
+            contacto = Contacto(id, nombre, telefono, email)
             contacto.favorito = favorito
             self.contactos.append(contacto)  # Con append se agrega el objeto Contacto creado a la lista
 
