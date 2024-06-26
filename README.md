@@ -8,7 +8,7 @@ Este proyecto consiste en una aplicación de consola en Python para gestionar un
 
 Se debe instalar en la terminal de Python el conector de MySQL y tener la base de datos cargada para que se ejecute el programa y se guarden los contactos.
 
-Colocar en terminal de python: pip instal mysql-connector-python
+Colocar en terminal de python: pip install mysql-connector-python
 
 # Funcionalidades Principales  ⚙ 
 
