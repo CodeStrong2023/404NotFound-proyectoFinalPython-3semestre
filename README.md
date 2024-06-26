@@ -4,6 +4,12 @@ Repositorio para el Proyecto Integrador del Tercer semestre en la Tecnicatura Un
 
 Este proyecto consiste en una aplicación de consola en Python para gestionar una agenda de contactos utilizando una base de datos MySQL. Permite agregar, mostrar, buscar, editar y eliminar contactos, almacenando la información en una base de datos local.
 
+# ⚠ Advertencia ⚠
+
+Se debe instalar en la terminal de Python el conector de MySQL y tener la base de datos cargada para que se ejecute el programa y se guarden los contactos.
+
+Colocar en terminal de python: pip instal mysql-connector-python
+
 # Funcionalidades Principales  ⚙ 
 
 Agregar Contacto: Permite ingresar nuevos contactos especificando nombre, teléfono y correo electrónico, con la opción de marcar como favorito.
