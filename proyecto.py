@@ -102,10 +102,10 @@ class Agenda:
 
     def editar_contacto(self):
         self.mostrar_contactos()
-        id = input("\nIngrese el ID del contacto que desea editar: ")
+        nombre = input("\nIngrese el nombre del contacto que desea editar: ")
         encontrado = False
         for contacto in self.contactos:
-            if str(contacto.id) == id:
+            if str(contacto.nombre) == nombre:
                 encontrado = True
                 print("Editar contacto:")
                 nuevo_nombre = input(f"Nuevo nombre ({contacto.nombre}): ") or contacto.nombre
