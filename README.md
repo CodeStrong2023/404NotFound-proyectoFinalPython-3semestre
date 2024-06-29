@@ -10,6 +10,8 @@ Se debe instalar en la terminal de Python el conector de MySQL y tener la base d
 
 Colocar en terminal de python: pip install mysql-connector-python
 
+Dentro del código, en la clase Agenda, se debe colocar la contraseña personal de MySQL, en el parámetro de conexión "password" para tener una conexión exitosa.
+
 # Funcionalidades Principales  ⚙ 
 
 Agregar Contacto: Permite ingresar nuevos contactos especificando nombre, teléfono y correo electrónico, con la opción de marcar como favorito.
